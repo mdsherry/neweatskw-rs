@@ -1,0 +1,19 @@
+[package]
+name = "neweatskw-rs"
+version = "0.1.0"
+authors = ["Mark Sherry <mdsherry@gmail.com>"]
+
+[dependencies]
+csv = "1.0"
+serde = "1.0"
+reqwest = "0.9"
+structopt = "0.2"
+rusqlite = { version="0.15", features=["chrono"] }
+chrono = "0.4"
+failure = "0.1"
+serde_derive = "1.0"
+egg-mode = "0.10"
+zip = "0.4"
+regex = "1.0"
+lazy_static = "1.2"
+encoding = "0.2"
