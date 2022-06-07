@@ -1,5 +1,6 @@
+use anyhow::Error;
 use encoding::{all::ISO_8859_1, DecoderTrap, Encoding};
-use failure::Error;
+use serde::Deserialize;
 
 use std::path::Path;
 #[derive(Debug, Deserialize)]

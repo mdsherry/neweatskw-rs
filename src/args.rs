@@ -1,13 +1,14 @@
+use clap::Parser;
 use std::path::PathBuf;
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 pub struct Update {
     /// Update the database with new restaurants from CSV
-    #[structopt(long = "update")]
+    #[clap(long = "update")]
     pub update: bool,
 
     /// File to obtain data from (default: testdata/Facilities_OpenData.csv)
-    #[structopt(
+    #[clap(
         long = "datasource",
         parse(from_os_str),
         default_value = "testdata/Facilities_OpenData.csv"
@@ -15,7 +16,7 @@ pub struct Update {
     pub datasource: PathBuf,
 
     /// SQLite database file for storing updates
-    #[structopt(
+    #[clap(
         long = "database",
         parse(from_os_str),
         default_value = "restaurants.db"
@@ -23,43 +24,43 @@ pub struct Update {
     pub database: PathBuf,
 
     /// Return informaiton on the N restaurants discovered in the last N days
-    #[structopt(long = "getrecent")]
+    #[clap(long = "getrecent")]
     pub get_recent: Option<i32>,
 
     /// For --getrecent, store the recent additions in the database.
-    #[structopt(long = "enqueue")]
+    #[clap(long = "enqueue")]
     pub enqueue: bool,
 
     /// The date of the update - format YYYY-MM-DD
-    #[structopt(long = "date")]
+    #[clap(long = "date")]
     pub date: Option<String>,
 }
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 pub struct Fetch {
     /// File to obtain data from (default: testdata/Facilities_OpenData.csv)
-    #[structopt(
+    #[clap(
         long = "datasource",
         parse(from_os_str),
         default_value = "testdata/Facilities_OpenData.csv"
     )]
     pub datasource: PathBuf,
 
-    #[structopt(
+    #[clap(
         long = "url",
         default_value = "http://www.regionofwaterloo.ca/opendatadownloads/Inspections.zip"
     )]
     pub url: String,
 }
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 pub struct Tweet {
     /// Authorize this script to update your Twitter account.
-    #[structopt(long="authorize")]
+    #[clap(long = "authorize")]
     pub authorize: bool,
 
     /// SQLite database file for storing updates
-    #[structopt(
+    #[clap(
         long = "database",
         parse(from_os_str),
         default_value = "restaurants.db"
@@ -67,10 +68,10 @@ pub struct Tweet {
     pub database: PathBuf,
 }
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 pub struct SanitizeDb {
     /// SQLite database file for storing updates
-    #[structopt(
+    #[clap(
         long = "database",
         parse(from_os_str),
         default_value = "restaurants.db"
@@ -78,14 +79,14 @@ pub struct SanitizeDb {
     pub database: PathBuf,
 }
 
-#[derive(Debug, StructOpt)]
+#[derive(Debug, Parser)]
 pub enum Args {
-    #[structopt(name = "update")]
+    #[clap(name = "update")]
     Update(Update),
-    #[structopt(name = "fetch")]
+    #[clap(name = "fetch")]
     Fetch(Fetch),
-    #[structopt(name = "tweet")]
+    #[clap(name = "tweet")]
     Tweet(Tweet),
-    #[structopt(name = "sanitizedb")]
-    SanitizeDb(SanitizeDb)
+    #[clap(name = "sanitizedb")]
+    SanitizeDb(SanitizeDb),
 }
